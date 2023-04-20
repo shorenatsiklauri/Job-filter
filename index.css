@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: 0;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  font-family: "League Spartan", sans-serif;
+  background-color: #f2f2f2;
+}
+
+header {
+  background-color: #5ca5a5;
+  height: 156px;
+  width: 375px;
+  left: 0px;
+  top: 0px;
+  border-radius: 0px;
+  width: 100%;
+  font-family: "League Spartan", sans-serif;
+}
+
+.conteiner {
+  background: #f2f2f2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  font-family: "League Spartan", sans-serif;
+}
+
+.hiddenfilterbox {
+  color: #5ca5a5;
+  height: 120px;
+  width: 327px;
+  background: #ffffff;
+  box-shadow: 0px 15px 20px -5px rgba(13, 113, 130, 0.15);
+  margin-top: -30px;
+  font-family: "League Spartan", sans-serif;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.box {
+  height: 257px;
+  width: 327px;
+  background: #ffffff;
+  margin-top: 50px;
+  border-left: 5px solid #5ca5a5;
+  border-radius: 5px;
+}
+.box1part1 {
+  width: 320px;
+  margin-left: 5px;
+}
+.FEATURED {
+  height: 24px;
+  width: 79px;
+  border-radius: 12px;
+  background: #2b3939;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: -0.10769230872392654px;
+  padding-left: 8px;
+  margin: 5px;
+}
+.new {
+  height: 24px;
+  width: 51px;
+  border-radius: 10px;
+  padding-left: 8px;
+  background-color: #5ca5a5;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "League Spartan", sans-serif;
+  font-weight: 700;
+  margin: 5px;
+}
+.p1 {
+  color: #5ca5a5;
+}
+.box1smalllighttexts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  border-bottom: 2px solid gray;
+  font-family: "League Spartan", sans-serif;
+  margin-top: 5px;
+}
+.box1part2 {
+  font-family: "League Spartan", sans-serif;
+  margin-top: 5px;
+}
+
+button {
+  height: 32px;
+  width: 113px;
+  font-family: "League Spartan", sans-serif;
+  font-size: 16px;
+  color: #5ca5a5;
+  font-weight: 700;
+  border: none;
+  margin-top: 10px;
+  padding: left 0px;
+  position: relative;
+  padding-right: 30px;
+}
+.greenbox {
+  height: 32px;
+  width: 32px;
+  left: 81px;
+  top: 0px;
+  border-radius: [object Object]px;
+  background: #5ca5a5;
+  position: absolute;
+  border-radius: 0px 5px 5px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.blackboldtext {
+  color: #2b3939;
+  font-family: "League Spartan", sans-serif;
+  font-style: Bold;
+  font-size: 15px;
+  position: absolute;
+  margin-top: 10px;
+}
+.box1smalllighttexts {
+  margin-top: 30px;
+  padding: 15px;
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  color: #7c8f8f;
+}
+.boxfor {
+  height: 32px;
+  width: 32px;
+  left: 81px;
+  top: 0px;
+  border-radius: [object Object]px;
+  background: #5ca5a5;
+}
+
+.clear {
+  background-color: #ffffff;
+  color: #7c8f8f;
+  margin-left: 90px;
+}
+.box1part2 {
+  width: 250px;
+}
+.my-svg {
+  border-radius: 50px;
+  margin-top: -60px;
+  margin-left: 24px;
+}
+.box1part2 button {
+  height: 32px;
+  width: 75px;
+  border-radius: 0px;
+  margin-left: 5px;
+  border-radius: 5px;
+}
+@media screen and (min-width: 980px) {
+  header {
+    background-color: #5ca5a5;
+    height: 156px;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    border-radius: 0px;
+    font-family: "League Spartan", sans-serif;
+  }
+
+  .conteiner {
+    background: #f2f2f2;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    font-family: "League Spartan", sans-serif;
+  }
+
+  .hiddenfilterbox {
+    color: #5ca5a5;
+    background: #ffffff;
+    box-shadow: 0px 15px 20px -5px rgba(13, 113, 130, 0.15);
+    margin-top: -30px;
+    font-family: "League Spartan", sans-serif;
+    padding: 20px;
+    border-radius: 10px;
+    height: 72px;
+    width: 1110px;
+    border-radius: 7px;
+  }
+
+  .box {
+    background: #ffffff;
+    margin-top: 50px;
+    border-left: 5px solid #5ca5a5;
+    height: 152px;
+    width: 1110px;
+    border-radius: 5px;
+  }
+
+  .box1part2 {
+    margin-left: 500px;
+    margin-top: -80px;
+    font-display: flex;
+    flex-direction: row;
+    width: 500px;
+  }
+  .my-svg {
+    margin-left: 20px;
+    margin-top: 30px;
+    margin-right: 50px;
+    position: absolute;
+  }
+  .box1part1 {
+    width: 320px;
+    margin-left: 150px;
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+  .box1smalllighttexts {
+    border-bottom: none;
+    margin-left: -15px;
+  }
+  .hiddenfilterbox {
+    display: flex;
+    gap: 16px;
+  }
+  .clear {
+    background-color: #ffffff;
+    color: #7c8f8f;
+    margin-left: 600px;
+  }
+}
