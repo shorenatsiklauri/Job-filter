@@ -48,9 +48,49 @@ header {
   font-family: "League Spartan", sans-serif;
   padding: 20px;
   border-radius: 5px;
+  display: none;
+}
+.filter {
+  display: flex;
+  justify-content: end;
+  position: relative;
+  width: 160px;
+
 }
 
-.box {
+button {
+  height: 32px;
+  width: 150px;
+  font-family: "League Spartan", sans-serif;
+  font-size: 16px;
+  color: #5ca5a5;
+  font-weight: 700;
+  border: none;
+  padding: left 0px;
+  position: relative;
+  padding-right: 30px;
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #5ca5a5;
+  color: white;
+}
+
+.greenbox {
+  height: 32px;
+  width: 32px;
+  border-radius: [object Object]px;
+  background: #5ca5a5;
+  border-radius: 0px 5px 5px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: -30px;
+  margin-top: -5px;
+}
+.boxlist {
   height: 257px;
   width: 327px;
   background: #ffffff;
@@ -58,11 +98,12 @@ header {
   border-left: 5px solid #5ca5a5;
   border-radius: 5px;
 }
-.box1part1 {
-  width: 320px;
-  margin-left: 5px;
+.boxesspace {
+  margin-bottom: 34px;
+  position: relative;
 }
-.FEATURED {
+
+.featured {
   height: 24px;
   width: 79px;
   border-radius: 12px;
@@ -87,56 +128,28 @@ header {
   font-weight: 700;
   margin: 5px;
 }
-.p1 {
+.company {
   color: #5ca5a5;
-}
-.box1smalllighttexts {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  border-bottom: 2px solid gray;
-  font-family: "League Spartan", sans-serif;
-  margin-top: 5px;
-}
-.box1part2 {
-  font-family: "League Spartan", sans-serif;
-  margin-top: 5px;
+  font-size: 18px;
 }
 
-button {
-  height: 32px;
-  width: 113px;
-  font-family: "League Spartan", sans-serif;
-  font-size: 16px;
-  color: #5ca5a5;
-  font-weight: 700;
-  border: none;
-  margin-top: 10px;
-  padding: left 0px;
-  position: relative;
-  padding-right: 30px;
-}
-.greenbox {
-  height: 32px;
-  width: 32px;
-  left: 81px;
-  top: 0px;
-  border-radius: [object Object]px;
-  background: #5ca5a5;
-  position: absolute;
-  border-radius: 0px 5px 5px 0px;
+.box1part1 {
+  width: 300px;
+  margin-left: 24px;
+  margin-top: 5px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
 }
-.blackboldtext {
+.position {
   color: #2b3939;
   font-family: "League Spartan", sans-serif;
   font-style: Bold;
   font-size: 15px;
   position: absolute;
-  margin-top: 10px;
+  margin-top: 50px;
+  margin-left: 24px;
 }
 .box1smalllighttexts {
   margin-top: 30px;
@@ -147,14 +160,14 @@ button {
   align-items: center;
   flex-direction: row;
   color: #7c8f8f;
+  margin-left: 10px;
+  border-bottom: 1px solid gray;
 }
-.boxfor {
-  height: 32px;
-  width: 32px;
-  left: 81px;
-  top: 0px;
-  border-radius: [object Object]px;
-  background: #5ca5a5;
+
+.box1part2 {
+  font-family: "League Spartan", sans-serif;
+  margin-top: 5px;
+  margin-left: 24px;
 }
 
 .clear {
@@ -162,13 +175,21 @@ button {
   color: #7c8f8f;
   margin-left: 90px;
 }
-.box1part2 {
-  width: 250px;
-}
-.my-svg {
+
+.company-logo {
   border-radius: 50px;
   margin-top: -60px;
   margin-left: 24px;
+}
+
+.hiddenfilterbox button {
+  height: 32px;
+  width: 100px;
+  border-radius: 0px;
+  margin-left: 5px;
+  border-radius: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
 }
 .box1part2 button {
   height: 32px;
@@ -176,6 +197,8 @@ button {
   border-radius: 0px;
   margin-left: 5px;
   border-radius: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
 }
 @media screen and (min-width: 980px) {
   header {
@@ -211,47 +234,80 @@ button {
     height: 72px;
     width: 1110px;
     border-radius: 7px;
+    display: none;
   }
 
-  .box {
-    background: #ffffff;
-    margin-top: 50px;
-    border-left: 5px solid #5ca5a5;
-    height: 152px;
-    width: 1110px;
-    border-radius: 5px;
-  }
 
-  .box1part2 {
-    margin-left: 500px;
-    margin-top: -80px;
-    font-display: flex;
-    flex-direction: row;
-    width: 500px;
-  }
-  .my-svg {
-    margin-left: 20px;
-    margin-top: 30px;
-    margin-right: 50px;
-    position: absolute;
-  }
-  .box1part1 {
-    width: 320px;
-    margin-left: 150px;
-    margin-top: 20px;
-    padding-top: 20px;
-  }
-  .box1smalllighttexts {
-    border-bottom: none;
-    margin-left: -15px;
-  }
-  .hiddenfilterbox {
-    display: flex;
-    gap: 16px;
-  }
-  .clear {
-    background-color: #ffffff;
-    color: #7c8f8f;
-    margin-left: 600px;
-  }
+.boxlist {
+  background: #ffffff;
+  margin-top: 50px;
+  border-left: 5px solid #5ca5a5;
+  height: 152px;
+  width: 1110px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.company-logo {
+  margin-left: 20px;
+  margin-top: 30px;
+
+  position: absolute;
+}
+.box1part1 {
+  width: 320px;
+  margin-left: 150px;
+  margin-top: -10px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.box1smalllighttexts {
+  border-bottom: none;
+  margin-left: -15px;
+  margin-left: 135px;
+}
+.box1part2 {
+  margin-left: 600px;
+  position: absolute;
+  margin-top: -70px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  width: 500px;
+}
+
+.active.hiddenfilterbox {
+  display: flex;
+  gap: 16px;
+  display: none;
+}
+.clear {
+  background-color: #ffffff;
+  color: #7c8f8f;
+  margin-left: 600px;
+}
+
+.position {
+  margin-top: 70px;
+  margin-left: 150px;
+}
+
+.boxesspace {
+  margin-bottom: 150px;
+}
+button {
+  height: 32px;
+  width: 113px;
+  font-family: "League Spartan", sans-serif;
+  font-size: 16px;
+  color: #5ca5a5;
+  font-weight: 700;
+  border: none;
+  margin-top: 10px;
+  padding: left 0px;
+  position: relative;
+  padding-right: 30px;
+  margin-top: 60px;
 }
