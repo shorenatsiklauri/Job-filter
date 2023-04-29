@@ -1,8 +1,11 @@
 import data from "./data.json" assert { type: "json" };
 
 const list = document.querySelector(".boxesspace");
-const hiddenFilterBox = document.querySelector(".hiddenfilterbox");
+const filterspace = document.querySelector(".filterspace");
+const conteiner = document.querySelector(".conteiner");
+const filterspacewrapper = document.querySelector(".filterspace-wrapper");
 const filters = [];
+
 const createDomElement = (tag, className, src, text, event, eventFc) => {
   const element = document.createElement(tag);
 
@@ -73,7 +76,9 @@ for (let index = 0; index < data.length; index++) {
     console.log(filters);
     if (!filters.includes(filter)) {
       filters.push(filter);
-
+      showbuttons();
+      hidbuttons();
+      filterList();
       const filtered = filterData();
       console.log(filtered);
     }
@@ -81,10 +86,13 @@ for (let index = 0; index < data.length; index++) {
   const newButton2 = createDomElement("button", "button2", null, level);
   newButton2.addEventListener("click", (event) => {
     const filter = event.target.textContent;
+
     console.log(filters);
     if (!filters.includes(filter)) {
       filters.push(filter);
-
+      showbuttons();
+      hidbuttons();
+      filterList();
       const filtered = filterData();
       console.log(filtered);
     }
@@ -99,7 +107,9 @@ for (let index = 0; index < data.length; index++) {
       console.log(filters);
       if (!filters.includes(filter)) {
         filters.push(filter);
-
+        showbuttons();
+        hidbuttons();
+        filterList();
         const filtered = filterData();
         console.log(filtered);
       }
@@ -117,7 +127,9 @@ for (let index = 0; index < data.length; index++) {
       console.log(filters);
       if (!filters.includes(filter)) {
         filters.push(filter);
-
+        showbuttons();
+        hidbuttons();
+        filterList();
         const filtered = filterData();
         console.log(filtered);
 
@@ -144,6 +156,7 @@ for (let index = 0; index < data.length; index++) {
     list.appendChild(boxesspace);
   }
 }
+
 function filterData() {
   return data.filter((item) => {
     return filters.every((filterbtn) => {
@@ -154,15 +167,88 @@ function filterData() {
         item.tools.includes(filterbtn)
       );
     });
+  });
+}
 
-    function addFilterButton(filter) {
-      const filterButton = document.createElement("button");
-      filterButton.classList.add("filter-btn");
-      filterButton.textContent = filter;
+function showbuttons() {
+  for (let i = 0; i < filters.length; i++) {
+    const filterText = filters[i];
 
-      filterButton.addEventListener("click", () => {});
+    const existingButton = Array.from(filterspace.children).find(
+      (button) => button.innerText === filterText
+    );
 
-      hiddenFilterBox.appendChild(filterButton);
+    if (!existingButton) {
+      const selectedButton = document.createElement("button");
+      selectedButton.innerText = filterText;
+
+      selectedButton.addEventListener("click", () => {
+        conteiner.style.display = "block"; // show container
+      });
+
+      filterspace.appendChild(selectedButton);
+    }
+  }
+
+  // hide container
+  if (filterspace.length === 0) {
+    conteiner.style.display = "none";
+  }
+}
+
+const clearButton = document.querySelector(".clear");
+clearButton.addEventListener("click", clearEverything);
+
+function clearEverything() {
+  conteiner.remove();
+}
+function hidbuttons() {
+  const buttons = filterspace.querySelectorAll("button");
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      button.remove();
+    });
+  });
+}
+function filterList() {
+  const listItems = document.querySelectorAll(".boxesspace li");
+  const filteredData = filterData();
+
+  listItems.forEach((item) => {
+    const jobId = item.querySelector(".company").textContent.toLowerCase();
+
+    const shouldShow = filteredData.some((dataItem) => {
+      return dataItem.company.toLowerCase() === jobId;
+    });
+
+    if (!shouldShow) {
+      item.remove();
+      addlist();
     }
   });
+
+  function addlist() {
+    const buttons = filterspace.querySelectorAll("button");
+    const listItems = document.querySelectorAll(".filterspace");
+    const filteredData = filterData();
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        listItems.forEach((item) => {
+          const jobId = item
+            .querySelector(".company")
+            .textContent.toLowerCase();
+
+          const apdateitem = filteredData.some((dataItem) => {
+            return dataItem.company.toLowerCase() === jobId;
+          });
+
+          if (!apdateitem) {
+            item.add();
+            list.appendChild(boxesspace);
+          }
+        });
+      });
+    });
+  }
 }
