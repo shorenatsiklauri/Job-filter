@@ -1,20 +1,17 @@
 import data from "./data.json" assert { type: "json" };
 
-const list = document.querySelector(".boxesspace");
-const filterspace = document.querySelector(".filterspace");
-const conteiner = document.querySelector(".conteiner");
-const filterspacewrapper = document.querySelector(".filterspace-wrapper");
-const filters = [];
+const list = document.querySelector(".filters");
+const buttonchoosen = document.querySelector(".removebutton");
+const clear = document.querySelector(".clear");
 
-const createDomElement = (tag, className, src, text, event, eventFc) => {
+buttonchoosen.style.display = "none";
+
+const createDomElement = (tag, className, text, src, event, eventFc) => {
   const element = document.createElement(tag);
-
   element.classList.add(className);
-
   if (src) {
     element.src = src;
   }
-
   if (text) {
     element.textContent = text;
   }
@@ -24,231 +21,183 @@ const createDomElement = (tag, className, src, text, event, eventFc) => {
     };
   }
   return element;
-
-  if (event) {
-    element.addEventListener(event, eventFc);
-  }
-
-  return element;
 };
 
-for (let index = 0; index < data.length; index++) {
-  const {
-    id,
-    company,
-    logo,
-    new: isNew,
-    featured,
-    position,
-    role,
-    level,
-    postedAt,
-    contract,
-    location,
-    languages,
-    tools,
-  } = data[index];
+let filterArray = [];
+function showButtons() {
+  buttonchoosen.innerHTML = "";
+  for (let row = 0; row < filterArray.length; row++) {
+    const options = createDomElement("div", "option");
+    const filCard = createDomElement("button", "filtercard", filterArray[row]);
+    const Closesvg = createDomElement(
+      "img",
+      "remove",
+      null,
+      "./images/icon-remove.svg"
+    );
+    options.append(filCard, Closesvg);
+    buttonchoosen.append(options, clear);
 
-  const boxesspace = createDomElement("li", "boxlist");
-
-  const jobDetails = createDomElement("div", "job-details");
-  const box1part1 = createDomElement("div", "box1part1");
-  const box1smalllighttexts = createDomElement("div", "box1smalllighttexts");
-  const box1part2 = createDomElement("div", "box1part2");
-
-  const companyname = createDomElement("h2", "company", null, company);
-  const companynew = createDomElement("button", "new", null, "new ");
-  const companyfeatured = createDomElement(
-    "button",
-    "featured",
-    null,
-    "featured "
-  );
-  const companyLogo = createDomElement("img", "company-logo", logo);
-  const jobPosition = createDomElement("h2", "position", null, position);
-  const jobpostedAt = createDomElement("span", "postedAt", null, postedAt);
-  const jobType = createDomElement("span", "job-type", null, contract);
-  const joblocation = createDomElement("span", "job-location", null, location);
-  const newButton1 = createDomElement("button", "button1", null, role);
-
-  newButton1.addEventListener("click", (event) => {
-    const filter = event.target.textContent;
-    console.log(filters);
-    if (!filters.includes(filter)) {
-      filters.push(filter);
-      showbuttons();
-      hidbuttons();
-      filterList();
-      const filtered = filterData();
-      console.log(filtered);
-    }
-  });
-  const newButton2 = createDomElement("button", "button2", null, level);
-  newButton2.addEventListener("click", (event) => {
-    const filter = event.target.textContent;
-
-    console.log(filters);
-    if (!filters.includes(filter)) {
-      filters.push(filter);
-      showbuttons();
-      hidbuttons();
-      filterList();
-      const filtered = filterData();
-      console.log(filtered);
-    }
-  });
-
-  for (let index = 0; index < languages.length; index++) {
-    const language = languages[index];
-
-    const newButton3 = createDomElement("button", "button3", null, language);
-    newButton3.addEventListener("click", (event) => {
-      const filter = event.target.textContent;
-      console.log(filters);
-      if (!filters.includes(filter)) {
-        filters.push(filter);
-        showbuttons();
-        hidbuttons();
-        filterList();
-        const filtered = filterData();
-        console.log(filtered);
+    Closesvg.addEventListener("click", function () {
+      filterArray.splice(row, 1);
+      showButtons();
+      if (filterArray.length === 0) {
+        buttonchoosen.style.display = "none";
       }
+
+      let filtered = arrayFilt();
+      showCards(filtered);
     });
-
-    box1part2.appendChild(newButton3);
-  }
-
-  for (let index = 0; index < tools.length; index++) {
-    const tool = tools[index];
-
-    const newButton4 = createDomElement("button", "button4", null, tool);
-    newButton4.addEventListener("click", (event) => {
-      const filter = event.target.textContent;
-      console.log(filters);
-      if (!filters.includes(filter)) {
-        filters.push(filter);
-        showbuttons();
-        hidbuttons();
-        filterList();
-        const filtered = filterData();
-        console.log(filtered);
-
-        box1part2.appendChild(newButton4);
-      }
-    });
-
-    jobDetails.appendChild(companyLogo);
-    jobDetails.appendChild(jobPosition);
-    box1smalllighttexts.appendChild(jobpostedAt);
-    box1smalllighttexts.appendChild(jobType);
-    box1smalllighttexts.appendChild(joblocation);
-    box1part2.appendChild(newButton1);
-    box1part2.appendChild(newButton2);
-
-    box1part1.appendChild(companyname);
-    box1part1.appendChild(companynew);
-    box1part1.appendChild(companyfeatured);
-    boxesspace.appendChild(jobDetails);
-    jobDetails.appendChild(box1part1);
-    jobDetails.appendChild(box1smalllighttexts);
-    jobDetails.appendChild(box1part2);
-
-    list.appendChild(boxesspace);
   }
 }
+clear.addEventListener("click", () => {
+  buttonchoosen.style.display = "none";
+  filterArray = [];
+  showButtons();
+  showCards(data);
+});
 
-function filterData() {
-  return data.filter((item) => {
-    return filters.every((filterbtn) => {
-      return (
+function showCards(cards) {
+  list.innerHTML = "";
+  for (let index = 0; index < cards.length; index++) {
+    const {
+      id,
+      company,
+      logo,
+      new: textsforcheck,
+      featured,
+      position,
+      role,
+      level,
+      postedAt,
+      contract,
+      location,
+      languages,
+      tools,
+    } = cards[index];
+
+    const cardBox = createDomElement("div", "card");
+    const photo = createDomElement("img", "cardphoto", null, logo);
+    const nameofcompany = createDomElement("p", "companyname", company);
+    const newsmallbox = createDomElement("p", "newsmallbox", "new");
+    const feature = createDomElement("p", "featured", "featured");
+
+    const member = createDomElement("div", "boxfeatured");
+    member.append(nameofcompany);
+    if (textsforcheck) {
+      member.append(newsmallbox);
+    }
+
+    if (featured) {
+      member.append(feature);
+    }
+
+    const positionElement = createDomElement("p", "position", position);
+
+    const time = createDomElement("div", "info");
+    const day = createDomElement("p", "postedAt", postedAt);
+    const dot = createDomElement("div", "dot");
+    const contractel = createDomElement("p", "postedAt", contract);
+    const dots = createDomElement("div", "dot");
+    const locationel = createDomElement("p", "postedAt", location);
+    time.append(day, dot, contractel, dots, locationel);
+
+    const lineelement = createDomElement("div", "lineelement");
+
+    const allbutton = createDomElement("div", "buttonall");
+    const roleS = createDomElement("button", "btnall", role);
+    roleS.addEventListener("click", function () {
+      let elementrol = filterArray.includes(role);
+      if (!elementrol) {
+        buttonchoosen.style.display = "flex";
+        filterArray.push(role);
+        showButtons();
+        let filtered = arrayFilt();
+        showCards(filtered);
+      }
+    });
+
+    const levels = createDomElement("button", "btnall", level);
+    levels.addEventListener("click", function () {
+      let elementlevel = filterArray.includes(level);
+      if (!elementlevel) {
+        buttonchoosen.style.display = "flex";
+        filterArray.push(level);
+
+        showButtons();
+        let filtered = arrayFilt();
+        showCards(filtered);
+      }
+    });
+
+    allbutton.append(roleS, levels);
+    cardBox.append(
+      photo,
+      member,
+      positionElement,
+      time,
+      lineelement,
+      allbutton
+    );
+    list.append(cardBox);
+
+    for (let i = 0; i < languages.length; i++) {
+      let language = createDomElement("button", "btnall", languages);
+      allbutton.append(language);
+      language.textContent = languages[i];
+      language.addEventListener("click", function () {
+        let eng = filterArray.includes(languages[i]);
+        if (!eng) {
+          buttonchoosen.style.display = "flex";
+          filterArray.push(languages[i]);
+          showButtons();
+          let filtered = arrayFilt();
+
+          showCards(filtered);
+        }
+      });
+    }
+
+    for (let i = 0; i < tools.length; i++) {
+      let tool = createDomElement("button", "btnall", tools);
+      allbutton.append(tool);
+      tool.textContent = tools[i];
+
+      tool.addEventListener("click", function () {
+        eng = filterArray.includes(tools[i]);
+        if (!eng) {
+          buttonchoosen.style.display = "flex";
+          filterArray.push(tools[i]);
+
+          showButtons();
+          let filtered = arrayFilt();
+
+          showCards(filtered);
+        }
+      });
+    }
+
+    cardBox.append(
+      photo,
+      member,
+      positionElement,
+      time,
+      lineelement,
+      allbutton
+    );
+    list.append(cardBox);
+  }
+}
+showCards(data);
+function arrayFilt() {
+  let DoArray = data.filter((item) =>
+    filterArray.every(
+      (filterbtn) =>
         item.role === filterbtn ||
         item.level === filterbtn ||
         item.languages.includes(filterbtn) ||
         item.tools.includes(filterbtn)
-      );
-    });
-  });
-}
-
-function showbuttons() {
-  for (let i = 0; i < filters.length; i++) {
-    const filterText = filters[i];
-
-    const existingButton = Array.from(filterspace.children).find(
-      (button) => button.innerText === filterText
-    );
-
-    if (!existingButton) {
-      const selectedButton = document.createElement("button");
-      selectedButton.innerText = filterText;
-
-      selectedButton.addEventListener("click", () => {
-        conteiner.style.display = "block"; // show container
-      });
-
-      filterspace.appendChild(selectedButton);
-    }
-  }
-
-  // hide container
-  if (filterspace.length === 0) {
-    conteiner.style.display = "none";
-  }
-}
-
-const clearButton = document.querySelector(".clear");
-clearButton.addEventListener("click", clearEverything);
-
-function clearEverything() {
-  conteiner.remove();
-}
-function hidbuttons() {
-  const buttons = filterspace.querySelectorAll("button");
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      button.remove();
-    });
-  });
-}
-function filterList() {
-  const listItems = document.querySelectorAll(".boxesspace li");
-  const filteredData = filterData();
-
-  listItems.forEach((item) => {
-    const jobId = item.querySelector(".company").textContent.toLowerCase();
-
-    const shouldShow = filteredData.some((dataItem) => {
-      return dataItem.company.toLowerCase() === jobId;
-    });
-
-    if (!shouldShow) {
-      item.remove();
-      addlist();
-    }
-  });
-
-  function addlist() {
-    const buttons = filterspace.querySelectorAll("button");
-    const listItems = document.querySelectorAll(".filterspace");
-    const filteredData = filterData();
-
-    buttons.forEach((button) => {
-      button.addEventListener("click", () => {
-        listItems.forEach((item) => {
-          const jobId = item
-            .querySelector(".company")
-            .textContent.toLowerCase();
-
-          const apdateitem = filteredData.some((dataItem) => {
-            return dataItem.company.toLowerCase() === jobId;
-          });
-
-          if (!apdateitem) {
-            item.add();
-            list.appendChild(boxesspace);
-          }
-        });
-      });
-    });
-  }
+    )
+  );
+  return DoArray;
 }
